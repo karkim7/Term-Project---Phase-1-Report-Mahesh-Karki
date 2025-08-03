@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Registration</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        #confirmation {
+            margin-top: 15px;
+            padding: 10px;
+            background: #e8f5e9;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Student Registration</h1>
+        <form 
+            action="http://localhost:3000/register" 
+            method="POST"
+            enctype="application/x-www-form-urlencoded"
+        >
+            <input type="text" name="name" placeholder="Full Name" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="number" name="age" placeholder="Age" required>
+            <button type="submit">Register</button>
+        </form>
+        
+        <!-- Confirmation message -->
+        <div id="confirmation" style="display: none;">
+            <p>✅ Registration successful!</p>
+            <p>Data saved to database.</p>
+        </div>
+
+        <!-- Error message placeholder -->
+        <div id="error" style="display: none; color: red;"></div>
+    </div>
+
+    <script>
+        document.querySelector('form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const form = e.target;
+            const confirmation = document.getElementById('confirmation');
+            const errorDiv = document.getElementById('error');
+            
+            // Reset messages
+            confirmation.style.display = 'none';
+            errorDiv.style.display = 'none';
+
+            try {
+                // Convert form data to URL-encoded format
+                const formData = new URLSearchParams();
+                formData.append('name', form.elements.name.value);
+                formData.append('email', form.elements.email.value);
+                formData.append('age', form.elements.age.value);
+
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: formData.toString()
+                });
+
+                if (response.ok) {
+                    confirmation.style.display = 'block';
+                    form.reset();
+                } else {
+                    const error = await response.text();
+                    throw new Error(error);
+                }
+            } catch (error) {
+                errorDiv.style.display = 'block';
+                errorDiv.textContent = `Error: ${error.message}`;
+                console.error('Submission error:', error);
+            }
+        });
+    </script>
+</body>
+</html>
