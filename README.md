@@ -23,9 +23,12 @@ A full-stack web application for managing student registrations, featuring:
 
 ## 💡 Challenges & Lessons Learned
 1. **Form Data Handling**  
-   - Initial `req.body undefined` errors taught us the importance of:  
+- I gave a lot of time in AWS S3 to make it lunchable in public because of restrictions applied in using ACL (Access Control List). Then, I used the object link method using Inbound rule by adding rule.
+- I had multiple errors in fetching frontend data to backend and to mySQL database.
+   - Initial `req.body undefined` errors taught me  the importance of:  
      - Proper middleware ordering (`app.use(express.urlencoded())` before routes)  
-     - Correct `enctype="application/x-www-form-urlencoded"` in HTML forms  
+     - Correct `enctype="application/x-www-form-urlencoded"` in HTML forms 
+     - Finally, my project was successful that whatever I read/write in S3 object URL, it now be stored in my database. 
 
 2. **AWS Security**  
    - Learned to:  
@@ -64,4 +67,25 @@ click - index.html
    cp .env.example .env  
    node server.js
 
+
+Launch Frontend:
+
+bash
+cd frontend
+npx http-server
+Access at: http://localhost:8080
+
+Docker Deployment
+
+bash
+docker build -t student-registration .
+docker run -p 3000:3000 student-registration
+AWS Setup
+Frontend: Upload index.html/style.css to S3 bucket
+
+Backend: Deploy server.js to EC2
+
+Database: Use existing RDS MySQL instance
+
+Docker Link: https://hub.docker.com/repository/docker/maheshk77/student-registration-app/tags
 
