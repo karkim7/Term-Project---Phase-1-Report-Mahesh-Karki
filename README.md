@@ -1,43 +1,67 @@
-# Student Registration Web App  
-**By:** Mahesh Karki  
-**Student ID:** 1063667  
+# Student Registration System
 
----
+## 📌 Project Purpose
+A full-stack web application for managing student registrations, featuring:
+- **Frontend**: Responsive HTML/CSS form
+- **Backend**: Node.js/Express server
+- **Database**: MySQL (AWS RDS)
+- **Deployment**: Docker containerization & AWS cloud integration
 
-##  Overview  
-A lightweight **student registration system** built with HTML/CSS and containerized using Docker. The app provides a frontend interface for collecting student details (name, email, age) and is deployed on Docker Hub for easy sharing.  
+## 🚀 Key Features
+- User-friendly registration interface
+- Secure data persistence in cloud database
+- Real-time submission feedback
+- Scalable architecture
 
-**Key Features:**  
- Simple, responsive UI  
- Dockerized for portability  
- Ready-to-run on any system with Docker  
+## 🛠️ Technologies Used
+| Component       | Technology Stack |
+|----------------|------------------|
+| Frontend       | HTML5, CSS3, JavaScript |
+| Backend        | Node.js, Express |
+| Database       | MySQL (AWS RDS)  |
+| Infrastructure | Docker, AWS (S3, RDS) |
 
----
+## 💡 Challenges & Lessons Learned
+1. **Form Data Handling**  
+   - Initial `req.body undefined` errors taught us the importance of:  
+     - Proper middleware ordering (`app.use(express.urlencoded())` before routes)  
+     - Correct `enctype="application/x-www-form-urlencoded"` in HTML forms  
 
-##  Technologies Used  
-- **Frontend:** HTML5, CSS3  
-- **Containerization:** Docker, Nginx (web server)  
-- **Hosting:** Docker Hub  
+2. **AWS Security**  
+   - Learned to:  
+     - Never hardcode credentials (use `.env` files)  
+     - Restrict RDS security groups to specific IPs  
+     - Implement CORS policies properly  
 
----
+3. **Debugging Techniques**  
+   - Found these invaluable:  
+     - `console.log(req.body)` for request inspection  
+     - Browser DevTools' Network tab for API call analysis  
+     - `SELECT * FROM registrations` for database verification  
 
-#Build The Docker
-docker build -t student-registration-app .
+## 🖥️ How to Run the Project
+- Open Power Shell
+type: cd C:\Users\mahes\Documents\student-backend
+type: node server.js
 
-##  How to Run  
-docker run -d -p 8080:80 --name student-app student-registration-app
+Then, Open index.html file in browser
+@
+D:\student-app
 
-### Prerequisites  
-
-- Docker installed ([Download Docker](https://www.docker.com/products/docker-desktop))  
- student-app/
-├── index.html          # Frontend form (HTML)
-├── style.css           # Styling (CSS)
-├── Dockerfile          # Docker configuration
-└── README.md           # This file
-
-
-
+click - index.html
 
 
-Docker Hub username:maheshk77
+### Prerequisites
+- Node.js (v18+)
+- MySQL client
+- Docker (optional)
+
+### Local Development
+1. **Start Backend**:
+   ```bash
+   cd backend
+   npm install
+   cp .env.example .env  
+   node server.js
+
+
